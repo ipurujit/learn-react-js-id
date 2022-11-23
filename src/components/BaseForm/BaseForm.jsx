@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import { setUser } from '../../app/user-reducer';
 import inputFieldData from '../config/content';
 import { getDefaultFormDataFromInputFieldConfig } from '../utils/FormUtils';
 
 function BaseForm(props) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { inputFields, formType, redirect } = props;
-  console.log('render');
   // Loader for duration of API calls
   const [loading, setLoading] = useState(false);
   // Form data
@@ -41,11 +42,17 @@ function BaseForm(props) {
     })
       .then((res) => {
         console.log(res);
-        const authHeader = res.headers.get('Authorization');
-        localStorage.setItem('token', authHeader);
+        if (formType === 'login') {
+          const authHeader = res.headers.get('Authorization');
+          localStorage.setItem('token', authHeader);
+        }
         return res.json();
       })
       .then((resData) => {
+        if (formType === 'login') {
+          console.log('dispatching');
+          dispatch(setUser(resData.data));
+        }
         console.log(resData);
         navigate(redirect);
       })
@@ -63,13 +70,11 @@ function BaseForm(props) {
     inputs: [],
   });
   const fetchData = async () => {
-    console.log('use effect before get data');
     const data = await inputFieldData.getData();
     setFieldData({ ...data, inputs: inputFields });
     setFormData(
       getDefaultFormDataFromInputFieldConfig(inputFields, ''),
     );
-    console.log(data);
   };
   useEffect(() => {
     fetchData();

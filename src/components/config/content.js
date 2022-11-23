@@ -4,7 +4,7 @@ const content = {
     return 'http://localhost:8085';
   },
   async getData() {
-    console.log('enter get data');
+    console.log('Enter get data');
     if (this.a.length === 0) {
       // call api if anything is missing
       const response = await fetch('/preload-backend-data.json');
