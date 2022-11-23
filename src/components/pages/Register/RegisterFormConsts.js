@@ -1,0 +1,58 @@
+export const registerFormInputFields = [
+  {
+    id: 'register-form-full-name',
+    key: 1,
+    label: 'Name',
+    name: 'fullName',
+    placeholder: 'Enter full name',
+    required: true,
+    type: 'text',
+  },
+  {
+    id: 'register-form-date-of-birth',
+    key: 2,
+    label: 'Date of birth',
+    name: 'dateOfBirth',
+    required: true,
+    type: 'date',
+  },
+  {
+    id: 'register-form-email',
+    key: 3,
+    label: 'Email',
+    name: 'email',
+    placeholder: 'Enter email',
+    required: true,
+    type: 'email',
+  },
+  {
+    id: 'register-form-phone-number',
+    key: 4,
+    label: 'Phone number (with country code) e.g. "+16145245245"',
+    name: 'phoneNumber',
+    placeholder: 'Enter phone number with country code',
+    required: true,
+    type: 'text',
+    pattern: '^\\+[1-9][0-9]{0,2}[1-9][0-9]{9,11}$',
+  },
+  {
+    id: 'register-form-password',
+    key: 5,
+    label: 'Password',
+    name: 'password',
+    placeholder: 'Enter password',
+    required: true,
+    type: 'password',
+  },
+  {
+    id: 'register-form-confirm-password',
+    key: 6,
+    label: 'Confirm password',
+    name: 'confirmPassword',
+    placeholder: 'Re-enter password to confirm',
+    required: true,
+    type: 'password',
+  },
+];
+
+export const registerFunc = () => true;
